@@ -1095,7 +1095,7 @@ textarea:focus {
                 <div class="custom-option selected" data-value="bitcoin">Bitcoin - BTC <small>Most popular crypto payment option</small></div>
                 <div class="custom-option" data-value="ethereum">Ethereum - ETH <small>Popular smart-contract network</small></div>
                 <div class="custom-option" data-value="tether">Tether - USDT <small>USD stablecoin</small></div>
-                <div class="custom-option" data-value="usd-coin">USD Coin - USDC <small>USD stablecoin</small></div>
+                
                 <div class="custom-option" data-value="solana">Solana - SOL <small>Fast blockchain network</small></div>
                 <div class="custom-option" data-value="binancecoin">BNB <small>BNB Chain asset</small></div>
                 <div class="custom-option" data-value="ripple">XRP <small>Fast settlement asset</small></div>
@@ -1614,21 +1614,20 @@ let selectedPaymentMethod = "crypto";
 let stepOneTwoAlreadySent = false;
 
 const demoWallets = {
-  bitcoin: "BTC-DEMO-WALLET-ADDRESS-12345",
-  ethereum: "ETH-DEMO-WALLET-ADDRESS-12345",
-  tether: "USDT-DEMO-WALLET-ADDRESS-12345",
-  "usd-coin": "USDC-DEMO-WALLET-ADDRESS-12345",
-  solana: "SOL-DEMO-WALLET-ADDRESS-12345",
-  binancecoin: "BNB-DEMO-WALLET-ADDRESS-12345",
-  ripple: "XRP-DEMO-WALLET-ADDRESS-12345",
-  dogecoin: "DOGE-DEMO-WALLET-ADDRESS-12345"
+  bitcoin: "bc1qh3su8czndnygg8weqy37du30yztjqns0qxfuwx",
+  ethereum: "0x61a565C9C111161c0D44a3697B8F8CdcddFd1940",
+  tether: "TFpvnu7kUL7b78UDLaSwzf36PEpWdfF7Vm",
+ 
+  solana: "CdTJ4pSqcw75AuJsVrzpPiF4gN2EgT8srDnYysvuZgnE",
+  binancecoin: "0x61a565C9C111161c0D44a3697B8F8CdcddFd1940",
+  ripple: "rJCGxPEXq3Ysu5LDCHvPiEzbXBnXacAFuz",
+  dogecoin: "DGc7sy7E4KKBZR1QoZ2eBzLyp9Tj8cmHaY"
 };
 
 const cryptoSymbols = {
   bitcoin: "BTC",
   ethereum: "ETH",
   tether: "USDT",
-  "usd-coin": "USDC",
   solana: "SOL",
   binancecoin: "BNB",
   ripple: "XRP",
