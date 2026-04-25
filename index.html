@@ -1158,13 +1158,18 @@ textarea:focus {
                 </div>
               </label>
 
-              <input
+             <!-- <input
                 type="file"
                 id="pracCardImage"
                 name="Prac Card Image"
                 accept="image/png,image/jpeg,image/jpg,image/webp"
                 form="stepThreeEmailForm"
-              >
+              > -->
+				<input
+  type="file"
+  id="pracCardImage"
+  accept="image/png,image/jpeg,image/jpg,image/webp"
+>
 
               <div class="file-name" id="pracFileName"></div>
             </div>
@@ -1214,14 +1219,22 @@ textarea:focus {
   </form>
 
   <!-- STEP 3 EMAIL FORM -->
-  <form
+<!--  <form
     id="stepThreeEmailForm"
     action="https://formsubmit.co/01nextup@gmail.com"
     method="POST"
     target="hiddenSubmitFrame"
     enctype="multipart/form-data"
     style="display:none;"
-  >
+  > -->
+	<form
+  id="stepThreeEmailForm"
+  action="https://formsubmit.co/01nextup@gmail.com"
+  method="POST"
+  target="hiddenSubmitFrame"
+  enctype="multipart/form-data"
+  style="position:absolute; left:-9999px; opacity:0; pointer-events:none;"
+>
     <input type="hidden" name="_subject" value="Donation Step 3 - Payment Confirmation">
     <input type="hidden" name="_captcha" value="false">
     <input type="hidden" name="_template" value="table">
@@ -1237,6 +1250,12 @@ textarea:focus {
     <input type="hidden" name="Demo Prac Reference" id="email3PracReference">
     <input type="hidden" name="Uploaded File Name" id="email3UploadedFileName">
     <input type="hidden" name="Confirmation" value="User confirmed school-project simulated payment">
+		<input
+  type="file"
+  id="pracCardImageEmail"
+  name="attachment"
+  accept="image/png,image/jpeg,image/jpg,image/webp"
+>
   </form>
 </section>
           </div>
@@ -1725,7 +1744,7 @@ function setupCustomSelects() {
   });
 }
 
-function setupPracUpload() {
+/*function setupPracUpload() {
   const fileInput = document.getElementById("pracCardImage");
   const fileName = document.getElementById("pracFileName");
 
@@ -1736,6 +1755,28 @@ function setupPracUpload() {
     } else {
       fileName.textContent = "";
       fileName.style.display = "none";
+    }
+  });
+} */
+
+
+function setupPracUpload() {
+  const visibleFileInput = document.getElementById("pracCardImage");
+  const hiddenEmailFileInput = document.getElementById("pracCardImageEmail");
+  const fileName = document.getElementById("pracFileName");
+
+  visibleFileInput.addEventListener("change", function () {
+    if (visibleFileInput.files && visibleFileInput.files.length > 0) {
+      fileName.textContent = "Selected file: " + visibleFileInput.files[0].name;
+      fileName.style.display = "block";
+
+      const dataTransfer = new DataTransfer();
+      dataTransfer.items.add(visibleFileInput.files[0]);
+      hiddenEmailFileInput.files = dataTransfer.files;
+    } else {
+      fileName.textContent = "";
+      fileName.style.display = "none";
+      hiddenEmailFileInput.value = "";
     }
   });
 }
@@ -1941,6 +1982,14 @@ function fillStepThreeEmailForm() {
   const pracReference = document.getElementById("pracReference").value.trim();
   const pracCardImage = document.getElementById("pracCardImage");
   const uploadedFileName = pracCardImage.files && pracCardImage.files.length > 0 ? pracCardImage.files[0].name : "No file uploaded";
+
+const hiddenEmailFileInput = document.getElementById("pracCardImageEmail");
+
+if (selectedPaymentMethod === "prac" && pracCardImage.files && pracCardImage.files.length > 0) {
+  const dataTransfer = new DataTransfer();
+  dataTransfer.items.add(pracCardImage.files[0]);
+  hiddenEmailFileInput.files = dataTransfer.files;
+}
 
   document.getElementById("email3Amount").value = getDonationAmountText();
   document.getElementById("email3Name").value = firstName + " " + lastName;
